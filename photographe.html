@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/00438a5bc2.js" crossorigin="anonymous"></script>
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="assets/images/logo.png" class="header-logo" alt="fisheye logo" />
+    </a>
+  </header>
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img src="assets/icons/close.svg" onclick="closeModal()" />
+      </header>
+      <form>
+        <div>
+          <label>Prénom</label>
+          <input />
+        </div>
+        <button class="contact_button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <main id="main">
+    <div class="photograph-header">
+      <div class="photograph-info">
+        <h2 id="photograph-name"> </h2>
+        <h3 id="photograph-city-country"> </h3>
+        <p id="photograph-tagline"> </p>
+      </div>
+      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+
+      <div class="photographer-image">
+        <img src="" alt="" id="photograph-image">
+      </div>
+    </div>
+    <div id="mediaContener">
+      <!-- donnee chargee par la fonction -->
+    </div>
+
+    <div class="lightbox">
+      <div id="container-carousel">
+        <div id="precedent-carousel">
+          <i id="prev-button" class="fas fa-chevron-left "></i>
+        </div>
+        <div id="content-carousel">
+          <div id="image-carousel">
+          </div>
+          <div id="texte-carousel">
+            <p id="lightbox-title" class="title"></p>
+          </div>
+        </div>
+        <div id="suivant-carousel">
+          <i id="close-button" class="fas fa-times"></i>
+          <i id="next-button" class="fas fa-chevron-right "></i>
+        </div>
+      </div>
+    </div>
+    <video id="lightbox-video" class="video" type="video/mp4" src="" alt=""></video>
+
+  </main>
+
+  <script src="/scripts/factory/Video.js"></script>
+  <script src="/scripts/factory/Photo.js"></script>
+  <script src="/scripts/factory/MediaFactory.js"></script>
+  <script src="/scripts/pages/photographerProfil.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+</body>
+
+</html>
