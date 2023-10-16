@@ -17,27 +17,29 @@
     </a>
   </header>
   
-  <div id="contact_modal">
+  <div id="contact_modal" class="background">
     <div class="modal">
       <header>
-        <h2 id="contact_modal_title">
-        </h2>
+        <h2 id="contact_modal_title"></h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form>
+      <form role="form" aria-label="Formulaire de contact">
         <div>
-          <label>Prénom</label>
-          <input />
-          <label>Nom</label>
-          <input />
-          <label>Email</label>
-          <input />
-          <label>Votre message</label>
-          <textarea class="form_input_message"></textarea>
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" aria-label="Prénom" />
+            
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" aria-label="Nom" />
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" aria-label="Adresse email" />
+            
+            <label for="message">Votre message</label>
+            <textarea class="form_input_message" id="message" name="message" aria-label="Message"></textarea>
         </div>
-        <button class="contact_button">Envoyer</button>
-
-      </form>
+        
+        <button class="contact_button" type="submit" id="submit" aria-label="Bouton Envoyer">Envoyer</button>
+    </form>
     </div>
   </div>
   <main id="main">
@@ -54,7 +56,6 @@
       </div>
     </div>
     <div id="mediaContener">
-      <!-- donnee chargee par la fonction -->
     </div>
 
     <div class="lightbox">
@@ -78,7 +79,7 @@
     <video id="lightbox-video" class="video" type="video/mp4" src="" alt=""></video>
 
   </main>
-
+<script src="/scripts/factory/mediaPhotoVideo.js"></script>
   <script src="/scripts/factory/Video.js"></script>
   <script src="/scripts/factory/Photo.js"></script>
   <script src="/scripts/factory/MediaFactory.js"></script>

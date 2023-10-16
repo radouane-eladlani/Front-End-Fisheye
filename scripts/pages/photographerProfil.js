@@ -82,9 +82,8 @@ async function init() {
             photographer.id === parseInt(photographerId));
         const media = photographerData.media.filter(media =>
                 media.photographerId === parseInt(photographerId));
-                console.log(media);
         media.forEach((element, index) => {
-            const mediaclass = new MediaFactory(element);
+            const mediaclass = new MediaPhotoVideo(element);
             document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index));
         });
     

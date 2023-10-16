@@ -14,30 +14,57 @@ async function getPhotographerData() {
 
 async function displayModal() {
     const photographerId = urlParams();
+    if (!photographerId) {
+        console.error("Aucun ID de photographe spécifié dans l'URL");
+        return;
+    }
+
     const data = await getPhotographerData();
-    
-    if (data.photographers && photographerId) {
+
+    if (data.photographers) {
         const photographer = data.photographers.find(photographe => photographe.id === parseInt(photographerId));
-        
+
         if (photographer) {
             const modal = document.getElementById("contact_modal");
             modal.style.display = "flex";
             const modal_title = document.getElementById("contact_modal_title");
-            modal_title.textContent = "Contactez-moi " + photographer.name;
+            modal_title.innerHTML = `<h2> contactez-moi <br/>${photographer.name}</h2>`;
         } else {
             console.error("Photographe introuvable pour l'ID : " + photographerId);
         }
     }
 }
 
+
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
-}
-
-function urlParams() {
+    location.reload();
+  }
+  
+  function urlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
-}
+  }
+  
+  function submitForm(e) {
+    e.preventDefault();
 
-displayModal();
+    const form = document.querySelector("form");
+    
+    const photographerId = urlParams();
+
+    if (photographerId) {
+        const formData = new FormData(form);
+
+        formData.forEach((value, key) => {
+            console.log(`${key}: ${value}`);
+        });
+        
+    } else {
+        console.error("Aucun ID de photographe spécifié dans l'URL.");
+    }
+
+}
+const form = document.querySelector("form");
+form.addEventListener("submit", submitForm);
