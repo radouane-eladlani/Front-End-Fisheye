@@ -40,12 +40,28 @@ class MediaPhotoVideo {
 
         }
 
-
+        const divH3EtLike = document.createElement('div');
+        divH3EtLike.classList.add("flexBetween");
+    
         const titleElement = document.createElement('h3');
         titleElement.textContent = this.title;
-
-        article.appendChild(titleElement);
-
+    
+        const likesElement = document.createElement('i');
+        likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
+        likesElement.addEventListener('click', () => {
+            if (likesElement.classList.contains("liked")) {
+                this.likes--;
+                likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
+                likesElement.classList.remove("liked");
+            } else {
+                this.likes++;
+                likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
+                likesElement.classList.add("liked");
+            }
+        });
+        divH3EtLike.appendChild(titleElement);
+        divH3EtLike.appendChild(likesElement);
+        article.appendChild(divH3EtLike);
         return article;
     }
 

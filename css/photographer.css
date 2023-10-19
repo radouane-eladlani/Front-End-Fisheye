@@ -53,9 +53,6 @@
     border-radius: 8px;
 }
 
-#mediaContener h3 {
-    margin-top: 8px;
-}
 
 #mediaContener {
     display: grid;
@@ -63,6 +60,19 @@
     justify-items: center;
     gap: 20px 90px;
     margin: 100px 100px;
+}
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.like{
+color: #901C1C;
+}
+
+.noLike{
+    color: none;
 }
 
 .lightbox {
