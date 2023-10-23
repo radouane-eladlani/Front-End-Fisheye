@@ -41,6 +41,13 @@ function closeModal() {
     modal.style.display = "none";
     location.reload();
   }
+  window.addEventListener('keydown', function (e) {
+    if (e.key == 'Escape') {
+        e.preventDefault();
+        closeModal();
+    }
+});
+
   
   function urlParams() {
     const urlParams = new URLSearchParams(window.location.search);

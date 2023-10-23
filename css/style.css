@@ -5,7 +5,6 @@ body {
     margin: 0;
 }
 
-
 header {
     display: flex;
     flex-direction: row;
@@ -26,8 +25,8 @@ h1 {
 
 .photographer_section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 100px;
     margin-top: 100px;
 }
 
@@ -41,8 +40,9 @@ h1 {
 
 .photographer_section article h2 {
     color: #D3573C;
-    font-size: 36px;
+    font-size: 28px;
     margin-bottom: 0px;
+    cursor: pointer;
 }
 
 .photographer_section article img {
@@ -50,13 +50,23 @@ h1 {
     width: 200px;
     border-radius: 100px;
     object-fit: cover;
+    cursor: pointer;
 }
 .photographer_section article h3 {
     margin-top: 5px;
     margin-bottom: 0px;
+    font-size: 16px;
 }
+.photographer_section article h4 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: 12px;
+    
+}
+
 .photographer_section article p {
     margin-top: 5px;
     margin-bottom: 0px;
+    font-size: 12px;
+    color: #757575;
 }
-

@@ -24,7 +24,7 @@ function photographerTemplate(data) {
         });
         const h3 = document.createElement( 'h3' );
         h3.textContent = `${city}, ${country}`;
-        const pTagline = document.createElement( 'p' );
+        const pTagline = document.createElement( 'h4' );
         pTagline.textContent = `${tagline}`;
         const prix = document.createElement( 'p' );
         prix.textContent = `${price}€/jour`;

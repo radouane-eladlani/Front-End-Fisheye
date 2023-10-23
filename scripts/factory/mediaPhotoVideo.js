@@ -13,7 +13,9 @@ class MediaPhotoVideo {
         this.price = data.price;
     }
 
-    genererCarte(index) {
+        
+
+    genererCarte(index, media) {
         const article = document.createElement('article');
         if ("image" in this) {
             const photoElement = document.createElement('img');
@@ -39,7 +41,6 @@ class MediaPhotoVideo {
             article.appendChild(videoElement);
 
         }
-
         const divH3EtLike = document.createElement('div');
         divH3EtLike.classList.add("flexBetween");
     
@@ -47,6 +48,7 @@ class MediaPhotoVideo {
         titleElement.textContent = this.title;
     
         const likesElement = document.createElement('i');
+        likesElement.classList.add("flexInline")
         likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
         likesElement.addEventListener('click', () => {
             if (likesElement.classList.contains("liked")) {
@@ -57,13 +59,19 @@ class MediaPhotoVideo {
                 this.likes++;
                 likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                 likesElement.classList.add("liked");
+
             }
-        });
+            totalLikesDesPhotos(media,);
+
+        });        
+
         divH3EtLike.appendChild(titleElement);
         divH3EtLike.appendChild(likesElement);
         article.appendChild(divH3EtLike);
+
         return article;
     }
+        
 
     openLightbox(indexImg, elementSrc) {
         const modal = document.querySelector('.lightbox');

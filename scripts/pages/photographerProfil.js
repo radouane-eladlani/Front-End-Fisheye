@@ -84,7 +84,8 @@ async function init() {
                 media.photographerId === parseInt(photographerId));
         media.forEach((element, index) => {
             const mediaclass = new MediaPhotoVideo(element);
-            document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index));
+            document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index,media));
+
         });
     
         /* Si aucun photographe n'est trouvé avec l'ID spécifié, je génère une erreur */
@@ -94,6 +95,10 @@ async function init() {
 
         /* j'appel la fonction displayPhotographerInfo en parametre l'ID du photographe */
         displayPhotographerInfo(selectedPhotographer);
+        totalLikesDesPhotos(media);
+        priceMedia(photographerId, photographerData);
+
+
 
     } catch (error) {
         /* En cas d'erreur, j'affiche un message d'erreur dans la console */
@@ -113,7 +118,25 @@ function displayPhotographerInfo(selectedPhotographer) {
     photographerLocation.textContent = `${selectedPhotographer.city}, ${selectedPhotographer.country}`;
     photographerTagline.textContent = selectedPhotographer.tagline;
     photographerImage.src = `assets/photographers/${selectedPhotographer.portrait}`;
+    
 }
 
 /* J'appelle la fonction init pour afficher les informations du photographe */
 init();
+ 
+        
+function totalLikesDesPhotos(media) {
+    const totalLikes = media.reduce((total, media) => total + media.likes, 0);
+    const totalLikesContainer = document.getElementById("total-likes");
+    totalLikesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
+}
+    
+    function priceMedia(photographerId, photographerData) {
+        const photographer = photographerData.photographers.find(photographer =>
+            photographer.id === parseInt(photographerId));
+        
+        if (photographer) {
+            const priceContainer = document.getElementById("price-jour");
+            priceContainer.textContent = `${photographer.price}€ / jour`;
+        }
+    }
