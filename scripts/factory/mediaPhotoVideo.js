@@ -21,16 +21,19 @@ class MediaPhotoVideo {
             const photoElement = document.createElement('img');
             photoElement.src = `assets/images/${this.photographerId}/${this.image}`;
             photoElement.alt = this.title;
+            photoElement.date = this.date;
             photoElement.classList.add("imgVideo");
             photoElement.addEventListener('click', () => {
                 this.openLightbox(index, `assets/images/${this.photographerId}/${this.image}`);
             });
+
             article.appendChild(photoElement);
 
         } else {
             const videoElement = document.createElement('video');
             videoElement.src = `assets/images/${this.photographerId}/${this.video}`;
             videoElement.alt = this.title;
+            videoElement.date = this.date;
             videoElement.controls = true;
             videoElement.classList.add("imgVideo");
             videoElement.addEventListener('click', () => {
@@ -53,10 +56,14 @@ class MediaPhotoVideo {
         likesElement.addEventListener('click', () => {
             if (likesElement.classList.contains("liked")) {
                 this.likes--;
+                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
+                console.log(document.getElementById("totalLikes").textContent);
                 likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
                 likesElement.classList.remove("liked");
             } else {
                 this.likes++;
+                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
+                console.log(document.getElementById("totalLikes").textContent);
                 likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                 likesElement.classList.add("liked");
 
@@ -72,7 +79,6 @@ class MediaPhotoVideo {
         return article;
     }
         
-
     openLightbox(indexImg, elementSrc) {
         const modal = document.querySelector('.lightbox');
         const containerImage = document.getElementById('image-carousel');
@@ -111,6 +117,8 @@ class MediaPhotoVideo {
         return video;
     }
 }
+
+
 
 const modal = document.querySelector('.lightbox');
 const containerImage = document.getElementById('image-carousel');
@@ -243,3 +251,58 @@ window.addEventListener('keydown', function (e) {
         nextPhoto();
     }
 })
+
+const btnDropdown = document.querySelector('.btn-dropdown');
+function showHideMenu() {
+    const dropdownContent = document.querySelector('.dropdown-content');    
+    dropdownContent.classList.toggle('active');
+    document.querySelector('.chevron').classList.toggle('rotate');
+}
+
+
+btnDropdown.addEventListener('click', showHideMenu);
+const allFilters = Array.from(document.querySelectorAll('.dropdown-content li button'));
+const currentSort = document.getElementById('sort');
+
+let optionFilters = allFilters.find((filter) => filter.textContent === 
+currentSort.textContent);
+optionFilters.style.display = 'none';
+
+allFilters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const filterValue = filter.textContent;
+      currentSort.textContent = filterValue;
+      if (optionFilters) optionFilters.style.display = 'block';
+      filter.style.display = 'none';
+      optionFilters = filter;
+      const sortedData = sortData(filterValue);
+      imagesData = sortedData;
+      genererCarte();
+      showHideMenu();
+    });
+  });
+
+
+const sortData = (sortType) => {
+    switch (sortType) {
+      case 'Popularité':
+        return imagesData.slice().sort((a, b) => b.likes - a.likes);
+      case 'Date':
+        return imagesData.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      case 'Titre':
+        return imagesData.slice().sort((a, b) => a.title.localeCompare(b.title));
+      default:
+        return imagesData;
+    }
+  };
+
+function genererCarte() {
+    const mediaContener = document.getElementById('mediaContener');
+    mediaContener.innerHTML = ''; 
+
+    for (let i = 0; i < imagesData.length; i++) {
+        const mediaInstance = new MediaPhotoVideo(imagesData[i]);
+        const mediaCard = mediaInstance.genererCarte(i, imagesData);
+        mediaContener.appendChild(mediaCard);
+    }
+}

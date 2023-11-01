@@ -126,9 +126,10 @@ init();
  
         
 function totalLikesDesPhotos(media) {
-    const totalLikes = media.reduce((total, media) => total + media.likes, 0);
+    const totalLikes = media.reduce((total, media) => total + media.likes,0);
     const totalLikesContainer = document.getElementById("total-likes");
-    totalLikesContainer.innerHTML = `${totalLikes} <i class="fa-solid fa-heart"></i>`;
+    totalLikesContainer.innerHTML = `<span id="totalLikes">${totalLikes} </span> <i class="fa-solid fa-heart"></i>`;
+
 }
     
     function priceMedia(photographerId, photographerData) {
@@ -140,3 +141,6 @@ function totalLikesDesPhotos(media) {
             priceContainer.textContent = `${photographer.price}€ / jour`;
         }
     }
+
+
+    

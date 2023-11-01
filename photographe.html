@@ -25,18 +25,20 @@
       <form role="form" aria-label="Formulaire de contact">
         <div>
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" aria-label="Prénom" />
+          <input type="text" id="prenom" name="prenom" aria-label="Prénom" role="textbox" />
 
           <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" aria-label="Nom" />
+          <input type="text" id="nom" name="nom" aria-label="Nom" role="textbox" />
 
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" aria-label="Adresse email" />
+          <input type="email" id="email" name="email" aria-label="Adresse email" role="textbox" />
 
           <label for="message">Votre message</label>
-          <textarea class="form_input_message" id="message" name="message" aria-label="Message"></textarea>
+          <textarea class="form_input_message" id="message" name="message" aria-label="Message"
+            role="textbox"></textarea>
         </div>
-        <button class="contact_button" type="submit" id="submit" aria-label="Bouton Envoyer">Envoyer</button>
+        <button class="contact_button" type="submit" id="submit" aria-label="Bouton Envoyer"
+          role="button">Envoyer</button>
       </form>
     </div>
   </div>
@@ -47,19 +49,40 @@
         <h3 id="photograph-city-country"> </h3>
         <p id="photograph-tagline"> </p>
       </div>
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button" onclick="displayModal()" role="button">Contactez-moi</button>
 
       <div class="photographer-image">
         <img src="" alt="" id="photograph-image">
       </div>
     </div>
-    <div id="mediaContener">
-      
+    <div class="filter">
+    <h4>Trier par </h4>
+    <div class="filter-container">
+      <div class="dropdown">
+        <button class="btn-dropdown">
+          <span id="sort">Popularité</span>
+          <span class="chevron"> <i class="fas fa-chevron-up" > </i></span>
+        </button>
+        <ul class="dropdown-content">
+          <li>
+            <button>Popularité</button>
+          </li>
+          <li>
+            <button>Date</button>
+          </li>
+          <li>
+            <button>Titre</button>
+          </li>
+
+        </ul>
+      </div>
     </div>
+  </div>
+    <div id="mediaContener"></div>
     <div class="fixed-bottom">
       <span id="total-likes"></span>
       <span id="price-jour"></span>
-  </div>
+    </div>
 
     <div class="lightbox">
       <div id="container-carousel">
