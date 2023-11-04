@@ -75,3 +75,4 @@ function closeModal() {
 }
 const form = document.querySelector("form");
 form.addEventListener("submit", submitForm);
+

@@ -166,11 +166,10 @@ cursor: pointer;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 20%;
+    width: 15%;
     background-color: #DB8876;
     color: black;
     padding: 15px;
-    text-align: start;
     margin-right: 30px;
     border-radius: 5px 5px 0px 0px;
     display: flex;
@@ -191,6 +190,11 @@ cursor: pointer;
     height: 100%;
     background-color: white;
     z-index: 9999;
+}
+.title{
+    color: #901C1C;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
 }
 
 .lightbox-les-buttons {

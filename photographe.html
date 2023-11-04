@@ -9,100 +9,119 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<body>
+<body tabindex="0">
   <header>
+    <nav>
     <a href="index.html">
       <img src="assets/images/logo.png" class="header-logo" alt="fisheye logo" />
     </a>
+    </nav>
   </header>
-
-  <div id="contact_modal" class="background">
+  
+<section tabindex="1">
+  <div id="contact_modal" class="background" >
     <div class="modal">
       <header>
         <h2 id="contact_modal_title"></h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
+        <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" role="button" />
       </header>
+
       <form role="form" aria-label="Formulaire de contact">
         <div>
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" aria-label="Prénom" role="textbox" />
+          <input type="text" id="prenom" name="prenom" aria-label="Prénom" role="textbox"  />
 
           <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" aria-label="Nom" role="textbox" />
+          <input type="text" id="nom" name="nom" aria-label="Nom" role="textbox"  />
 
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" aria-label="Adresse email" role="textbox" />
+          <input type="email" id="email" name="email" aria-label="Adresse email" role="textbox"  />
 
           <label for="message">Votre message</label>
           <textarea class="form_input_message" id="message" name="message" aria-label="Message"
             role="textbox"></textarea>
         </div>
-        <button class="contact_button" type="submit" id="submit" aria-label="Bouton Envoyer"
-          role="button">Envoyer</button>
+        <button class="contact_button" type="submit" id="submit" aria-label="envoyer" role="button">Envoyer</button>
       </form>
+
     </div>
   </div>
-  <main id="main">
-    <div class="photograph-header">
-      <div class="photograph-info">
-        <h2 id="photograph-name"> </h2>
-        <h3 id="photograph-city-country"> </h3>
-        <p id="photograph-tagline"> </p>
-      </div>
-      <button class="contact_button" onclick="displayModal()" role="button">Contactez-moi</button>
+</section>
 
-      <div class="photographer-image">
-        <img src="" alt="" id="photograph-image">
-      </div>
-    </div>
-    <div class="filter">
-    <h4>Trier par </h4>
-    <div class="filter-container">
-      <div class="dropdown">
-        <button class="btn-dropdown">
-          <span id="sort">Popularité</span>
-          <span class="chevron"> <i class="fas fa-chevron-up" > </i></span>
-        </button>
-        <ul class="dropdown-content">
-          <li>
-            <button>Popularité</button>
-          </li>
-          <li>
-            <button>Date</button>
-          </li>
-          <li>
-            <button>Titre</button>
-          </li>
+  <main id="main" tabindex="2">
 
-        </ul>
-      </div>
-    </div>
-  </div>
-    <div id="mediaContener"></div>
-    <div class="fixed-bottom">
-      <span id="total-likes"></span>
-      <span id="price-jour"></span>
-    </div>
-
-    <div class="lightbox">
-      <div id="container-carousel">
-        <div id="precedent-carousel">
-          <i id="prev-button" class="fas fa-chevron-left "></i>
+    <section tabindex="3">
+      <div class="photograph-header">
+        <div class="photograph-info">
+          <h2 id="photograph-name"> </h2>
+          <h3 id="photograph-city-country"> </h3>
+          <p id="photograph-tagline"> </p>
         </div>
-        <div id="content-carousel">
-          <div id="image-carousel">
-          </div>
-          <div id="texte-carousel">
-            <p id="lightbox-title" class="title"></p>
+        <button class="contact_button" onclick="displayModal()" role="button" aria-label="Contactez-moi">Contactez-moi</button>
+
+        <div class="photographer-image">
+          <img src="" alt="" id="photograph-image">
+        </div>
+      </div>
+    </section>
+
+    <section tabindex="4">
+      <div class="filter">
+        <h4>Trier par </h4>
+        <div class="filter-container">
+          <div class="dropdown">
+            <button class="btn-dropdown">
+              <span id="sort" tabindex="9">Popularité</span>
+              <span class="chevron"> <i class="fas fa-chevron-up"> </i></span>
+            </button>
+            <ul class="dropdown-content">
+              <li>
+                <button >Popularité</button>
+              </li>
+              <li>
+                <button >Date</button>
+              </li>
+              <li>
+                <button >Titre</button>
+              </li>
+            </ul>
           </div>
         </div>
-        <div id="suivant-carousel">
-          <i id="close-button" class="fas fa-times"></i>
-          <i id="next-button" class="fas fa-chevron-right "></i>
+      </div>
+    </section>
+
+    <section >
+      <div class="fixed-bottom">
+        <span id="total-likes"></span>
+        <span id="price-jour"></span>
+      </div>
+    </section>
+
+    <section tabindex="5">
+      <div id="mediaContener" tabindex="13"></div>
+    </section>
+
+    <section>
+      <div class="lightbox">
+        <div id="container-carousel">
+          <div id="precedent-carousel">
+            <i id="prev-button" class="fas fa-chevron-left "></i>
+          </div>
+          <div id="content-carousel">
+            <div id="image-carousel">
+            </div>
+            <div id="texte-carousel">
+              <p id="lightbox-title" class="title"></p>
+            </div>
+          </div>
+          <div id="suivant-carousel">
+            <i id="close-button" class="fas fa-times"></i>
+            <i id="next-button" class="fas fa-chevron-right "></i>
+          </div>
         </div>
       </div>
-    </div>
-    <video id="lightbox-video" class="video" type="video/mp4" src="" alt=""></video>
+      <video id="lightbox-video" class="video" type="video/mp4" src="" alt=""></video>
+    </section>
 
   </main>
   <script src="https://kit.fontawesome.com/00438a5bc2.js" crossorigin="anonymous"></script>

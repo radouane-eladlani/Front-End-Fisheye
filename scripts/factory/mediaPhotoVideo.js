@@ -49,7 +49,6 @@ class MediaPhotoVideo {
     
         const titleElement = document.createElement('h3');
         titleElement.textContent = this.title;
-    
         const likesElement = document.createElement('i');
         likesElement.classList.add("flexInline")
         likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
@@ -57,20 +56,20 @@ class MediaPhotoVideo {
             if (likesElement.classList.contains("liked")) {
                 this.likes--;
                 document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
-                console.log(document.getElementById("totalLikes").textContent);
                 likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
                 likesElement.classList.remove("liked");
+
             } else {
                 this.likes++;
                 document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
-                console.log(document.getElementById("totalLikes").textContent);
                 likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                 likesElement.classList.add("liked");
 
-            }
-            totalLikesDesPhotos(media,);
-
+            }        
+    
         });        
+        totalLikesDesPhotos(media);
+
 
         divH3EtLike.appendChild(titleElement);
         divH3EtLike.appendChild(likesElement);
@@ -128,8 +127,6 @@ const modalTitle = document.getElementById('lightbox-title');
 let imagesData = [];
 
 let currentIndex = 0;
-let currentPhotographerId;
-let videoData = [];
 
 const prevButton = document.getElementById('prev-button');
 const nextButton = document.getElementById('next-button');
@@ -251,6 +248,7 @@ window.addEventListener('keydown', function (e) {
         nextPhoto();
     }
 })
+
 
 const btnDropdown = document.querySelector('.btn-dropdown');
 function showHideMenu() {

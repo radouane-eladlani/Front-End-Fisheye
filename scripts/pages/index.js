@@ -41,6 +41,8 @@ async function getPhotographers() {
         displayData(photographers);
 
     }
+
     /* je lance la fonction init */
     init();
+    
     
