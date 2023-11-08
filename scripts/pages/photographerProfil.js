@@ -141,22 +141,4 @@ function totalLikesDesPhotos(media) {
         }
     }
 
-
-    document.addEventListener("keydown", function (event) {
-        const interactiveElements = document.querySelectorAll("a, button, input, textarea, select, details, section, article, [tabindex]:not([tabindex='-1'])");
-        const focusedElement = document.activeElement;
     
-        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-            const currentIndex = Array.from(interactiveElements).indexOf(focusedElement);
-    
-            if (currentIndex !== -1) {
-                if (event.key === "ArrowUp" && currentIndex > 0) {
-                    interactiveElements[currentIndex - 1].focus();
-                    event.preventDefault();
-                } else if (event.key === "ArrowDown" && currentIndex < interactiveElements.length - 1) {
-                    interactiveElements[currentIndex + 1].focus();
-                    event.preventDefault();
-                }
-            }
-        }
-    });

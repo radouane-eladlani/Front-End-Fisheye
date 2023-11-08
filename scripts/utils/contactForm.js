@@ -13,6 +13,9 @@ async function getPhotographerData() {
 }
 
 async function displayModal() {
+
+document.getElementById("prenom").focus()
+
     const photographerId = urlParams();
     if (!photographerId) {
         console.error("Aucun ID de photographe spécifié dans l'URL");
@@ -39,16 +42,15 @@ async function displayModal() {
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
-    location.reload();
   }
   window.addEventListener('keydown', function (e) {
     if (e.key == 'Escape') {
         e.preventDefault();
         closeModal();
+        this.location.reload();
+        
     }
 });
-
-  
   function urlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
@@ -75,4 +77,10 @@ function closeModal() {
 }
 const form = document.querySelector("form");
 form.addEventListener("submit", submitForm);
+
+form.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        submitForm(event);
+    }
+})
 

@@ -26,14 +26,15 @@
 }
 
 .photograph-info h3 {
-    color: #D3573C;
+    color: #901C1C;
     font-size: 20px;
 }
 
-.photograph-info p {
-    color: #D3573C;
+.photograph-info h4 {
+    color: #901C1C;
     font-size: 16px;
     margin: 0px;
+    font-weight:bold;
 }
 
 #photograph-image {
@@ -49,8 +50,6 @@
     gap: 10px;
     font-family: "DM Sans", sans-serif;
     font-size: 20px;
-    width: 95%;
-    max-width:  1400px;
     margin-top: 20px;
     margin-left: 80px;
 }
@@ -102,6 +101,7 @@
     margin-top: 0px;
     padding: 0px;
     border-radius: 0px 0px 5px 5px;
+    overflow: hidden;
 }
 
 .dropdown-content li {

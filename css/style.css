@@ -38,11 +38,12 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
+.photographer_section article a {
     color: #D3573C;
     font-size: 28px;
     margin-bottom: 0px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .photographer_section article img {
@@ -52,12 +53,12 @@ h1 {
     object-fit: cover;
     cursor: pointer;
 }
-.photographer_section article h3 {
+.photographer_section article h2 {
     margin-top: 5px;
     margin-bottom: 0px;
     font-size: 16px;
 }
-.photographer_section article h4 {
+.photographer_section article h3 {
     margin-top: 5px;
     margin-bottom: 0px;
     font-size: 12px;

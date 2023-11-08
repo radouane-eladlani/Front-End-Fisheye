@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -9,55 +9,55 @@
   <title>Fisheye - photographe </title>
 </head>
 
-<body tabindex="0">
+<body>
   <header>
-    <nav>
     <a href="index.html">
-      <img src="assets/images/logo.png" class="header-logo" alt="fisheye logo" />
+      <img src="assets/images/logo.png" class="header-logo" alt="fisheye logo" type="image" tabindex="0" />
     </a>
-    </nav>
   </header>
-  
-<section tabindex="1">
-  <div id="contact_modal" class="background" >
-    <div class="modal">
-      <header>
-        <h2 id="contact_modal_title"></h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" role="button" />
-      </header>
 
-      <form role="form" aria-label="Formulaire de contact">
-        <div>
-          <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" aria-label="Prénom" role="textbox"  />
+  <section>
+    <div id="contact_modal" class="background" aria-hidden="true" role="dialog">
+      <div class="modal">
+        <header>
+          <div id="contact_modal_title"></div>
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" role="button" />
+        </header>
 
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" aria-label="Nom" role="textbox"  />
+        <form role="form" aria-label="Formulaire de contact">
+          <div>
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" aria-label="Prénom" role="textbox" tabindex="0" />
 
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" aria-label="Adresse email" role="textbox"  />
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" aria-label="Nom" role="textbox" tabindex="0" />
 
-          <label for="message">Votre message</label>
-          <textarea class="form_input_message" id="message" name="message" aria-label="Message"
-            role="textbox"></textarea>
-        </div>
-        <button class="contact_button" type="submit" id="submit" aria-label="envoyer" role="button">Envoyer</button>
-      </form>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" aria-label="Adresse email" role="textbox" tabindex="0" />
 
+            <label for="message">Votre message</label>
+            <textarea class="form_input_message" id="message" name="message" aria-label="Message" role="textbox"
+              tabindex="0"></textarea>
+          </div>
+          <button class="contact_button" type="submit" id="submit" aria-label="envoyer" role="button"
+            tabindex="0">Envoyer</button>
+        </form>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  <main id="main" tabindex="2">
+  <main id="main">
 
-    <section tabindex="3">
+    <section>
       <div class="photograph-header">
         <div class="photograph-info">
           <h2 id="photograph-name"> </h2>
           <h3 id="photograph-city-country"> </h3>
-          <p id="photograph-tagline"> </p>
+          <h4 id="photograph-tagline"> </h4>
         </div>
-        <button class="contact_button" onclick="displayModal()" role="button" aria-label="Contactez-moi">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" role="button" aria-label="Contactez-moi"
+          tabindex="0">Contactez-moi</button>
 
         <div class="photographer-image">
           <img src="" alt="" id="photograph-image">
@@ -65,24 +65,24 @@
       </div>
     </section>
 
-    <section tabindex="4">
+    <section>
       <div class="filter">
         <h4>Trier par </h4>
         <div class="filter-container">
           <div class="dropdown">
             <button class="btn-dropdown">
-              <span id="sort" tabindex="9">Popularité</span>
+              <span id="sort" tabindex="0">Popularité</span>
               <span class="chevron"> <i class="fas fa-chevron-up"> </i></span>
             </button>
-            <ul class="dropdown-content">
+            <ul class="dropdown-content" tabindex="0">
               <li>
-                <button >Popularité</button>
+                <button tabindex="0">Popularité</button>
               </li>
               <li>
-                <button >Date</button>
+                <button tabindex="0">Date</button>
               </li>
               <li>
-                <button >Titre</button>
+                <button tabindex="0">Titre</button>
               </li>
             </ul>
           </div>
@@ -90,15 +90,15 @@
       </div>
     </section>
 
-    <section >
+    <section>
       <div class="fixed-bottom">
         <span id="total-likes"></span>
         <span id="price-jour"></span>
       </div>
     </section>
 
-    <section tabindex="5">
-      <div id="mediaContener" tabindex="13"></div>
+    <section>
+      <div id="mediaContener"></div>
     </section>
 
     <section>
@@ -120,7 +120,6 @@
           </div>
         </div>
       </div>
-      <video id="lightbox-video" class="video" type="video/mp4" src="" alt=""></video>
     </section>
 
   </main>

@@ -13,14 +13,33 @@ class MediaPhotoVideo {
         this.price = data.price;
     }
 
-        
-
     genererCarte(index, media) {
         const article = document.createElement('article');
+        article.tabIndex = 0;
+        article.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                if (document.activeElement === likesElement) {
+                    if (likesElement.classList.contains("liked")) {
+                        this.likes--;
+                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
+                        likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
+                        likesElement.classList.remove("liked");
+                    } else {
+                        this.likes++;
+                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
+                        likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
+                        likesElement.classList.add("liked");
+                    }       
+                } else {
+                    this.openLightbox(index, `assets/images/${this.photographerId}/${this.image}`);
+                }
+            }
+        });
+
         if ("image" in this) {
             const photoElement = document.createElement('img');
             photoElement.src = `assets/images/${this.photographerId}/${this.image}`;
-            photoElement.alt = this.title;
+            photoElement.alt = `Photographie : ${this.title}`
             photoElement.date = this.date;
             photoElement.classList.add("imgVideo");
             photoElement.addEventListener('click', () => {
@@ -32,7 +51,7 @@ class MediaPhotoVideo {
         } else {
             const videoElement = document.createElement('video');
             videoElement.src = `assets/images/${this.photographerId}/${this.video}`;
-            videoElement.alt = this.title;
+            videoElement.alt = `Vidéo : ${this.title}`
             videoElement.date = this.date;
             videoElement.controls = true;
             videoElement.classList.add("imgVideo");
@@ -41,17 +60,19 @@ class MediaPhotoVideo {
                 modalVideo.title = this.title;
                 this.openLightbox(index, `assets/images/${this.photographerId}/${this.video}`);
             });
+            
             article.appendChild(videoElement);
+
 
         }
         const divH3EtLike = document.createElement('div');
         divH3EtLike.classList.add("flexBetween");
-    
         const titleElement = document.createElement('h3');
         titleElement.textContent = this.title;
         const likesElement = document.createElement('i');
         likesElement.classList.add("flexInline")
         likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
+        likesElement.tabIndex = 0;
         likesElement.addEventListener('click', () => {
             if (likesElement.classList.contains("liked")) {
                 this.likes--;
@@ -65,7 +86,7 @@ class MediaPhotoVideo {
                 likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                 likesElement.classList.add("liked");
 
-            }        
+            }       
     
         });        
         totalLikesDesPhotos(media);
@@ -261,6 +282,7 @@ function showHideMenu() {
 btnDropdown.addEventListener('click', showHideMenu);
 const allFilters = Array.from(document.querySelectorAll('.dropdown-content li button'));
 const currentSort = document.getElementById('sort');
+allFilters.tabIndex = 0;
 
 let optionFilters = allFilters.find((filter) => filter.textContent === 
 currentSort.textContent);
