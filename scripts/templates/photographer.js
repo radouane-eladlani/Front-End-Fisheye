@@ -6,7 +6,7 @@ function photographerTemplate(data) {
 
     function getUserCardDOM() {
         const article = document.createElement('article');
-        article.tabIndex = 0;
+        article.tabIndex = 12;
         const img = document.createElement('img');
         img.setAttribute("src", picture)
         img.setAttribute("alt", `${name} photo`)
@@ -48,7 +48,7 @@ function photographerTemplate(data) {
 
 document.addEventListener('keydown', function (event) {
     if (event.key === "Tab") {
-        const focusableElements = document.querySelectorAll("[tabindex],input, button, textarea");
+        const focusableElements = document.querySelectorAll("[tabindex]");
         const currentIndex = Array.from(focusableElements).indexOf(document.activeElement);
 
         if (currentIndex === -1) {

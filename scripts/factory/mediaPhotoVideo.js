@@ -1,3 +1,4 @@
+/* classe MediaPhotoVideo sert a la construction des cartes */
 class MediaPhotoVideo {
     constructor(data) {
         this.id = data.id;
@@ -12,24 +13,30 @@ class MediaPhotoVideo {
         this.date = data.date;
         this.price = data.price;
     }
-
+    /* genererCarte permet de construire les cartes */
     genererCarte(index, media) {
+        /* Je creer l'article */
         const article = document.createElement('article');
+        /* j'ajoute un tabindex de 0 pour la nvigation au clavier*/
         article.tabIndex = 0;
+        /* je creer un addEventListener pour les focus  */
         article.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
+                /* activeElement permet de recuperer le focus */
                 if (document.activeElement === likesElement) {
                     if (likesElement.classList.contains("liked")) {
                         this.likes--;
-                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
                         likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
                         likesElement.classList.remove("liked");
+                        /* je recupere id totalLikes puis je le converti en entier et j'ajoute un textContent et le nombre sera -1 */
+                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
                     } else {
                         this.likes++;
-                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
                         likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                         likesElement.classList.add("liked");
-                    }       
+                        /* je recupere id totalLikes puis je le converti en entier et j'ajoute un textContent et le nombre sera -1 */
+                        document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
+                    }
                 } else {
                     this.openLightbox(index, `assets/images/${this.photographerId}/${this.image}`);
                 }
@@ -60,7 +67,7 @@ class MediaPhotoVideo {
                 modalVideo.title = this.title;
                 this.openLightbox(index, `assets/images/${this.photographerId}/${this.video}`);
             });
-            
+
             article.appendChild(videoElement);
 
 
@@ -74,22 +81,24 @@ class MediaPhotoVideo {
         likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
         likesElement.tabIndex = 0;
         likesElement.addEventListener('click', () => {
+            /* si le coeur est like on le retire sinon on l'ajoute avec du style */
             if (likesElement.classList.contains("liked")) {
                 this.likes--;
-                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
                 likesElement.innerHTML = `${this.likes} <i class="fa-regular fa-heart noLike" aria-hidden="true"></i>`;
                 likesElement.classList.remove("liked");
+                /* je recupere id totalLikes puis je le converti en entier et j'ajoute un textContent et le nombre sera -1 */
+                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) - 1;
 
             } else {
                 this.likes++;
-                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
                 likesElement.innerHTML = `${this.likes} <i class="fa-solid fa-heart like" aria-hidden="true"></i>`;
                 likesElement.classList.add("liked");
+                /* je recupere id totalLikes puis je le converti en entier et j'ajoute un textContent et le nombre sera +1 */
+                document.getElementById("totalLikes").innerHTML = parseInt(document.getElementById("totalLikes").textContent) + 1;
+            }
 
-            }       
-    
-        });        
-        totalLikesDesPhotos(media);
+        });
+        totalLikesMedia(media);
 
 
         divH3EtLike.appendChild(titleElement);
@@ -98,27 +107,33 @@ class MediaPhotoVideo {
 
         return article;
     }
-        
+/* je creer une fonction openLightbox */
     openLightbox(indexImg, elementSrc) {
         const modal = document.querySelector('.lightbox');
         const containerImage = document.getElementById('image-carousel');
         const modalTitle = document.getElementById('lightbox-title');
-
+        /* je recupere l'index de l'image dans le tableau */
         currentIndex = indexImg;
+        /* ensuite je fais containerImage.replaceChildren pour vider le containerImage */
         containerImage.replaceChildren([]);
+        /* ensuite je declare un childElement */
         let childElement;
+        /* si l'image est une image je creer une image sinon une video */
         if ("image" in this) {
             childElement = this.createImage(elementSrc);
         } else {
             childElement = this.createVideo(elementSrc);
         }
+        /* j'ajoute le title de l'image */
         modalTitle.textContent = this.title;
+        /* j'ajoute le childElement au containerImage */
         containerImage.appendChild(childElement)
+        /* je regle la modal avec un display flex */
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
     }
-
+    /* je creer un element image et video */
     createImage(elementSrc) {
         const image = document.createElement('img');
         image.id = "lightbox-image";
@@ -126,7 +141,6 @@ class MediaPhotoVideo {
         image.alt = this.title;
         return image;
     }
-
     createVideo(elementSrc) {
         const video = document.createElement('video');
         video.classList.add('video');
@@ -153,12 +167,12 @@ const prevButton = document.getElementById('prev-button');
 const nextButton = document.getElementById('next-button');
 const closeButton = document.getElementById('close-button');
 
-
+/* Fonction pour récupérer l'id du photographe depuis l'URL */
 function getPhotographerId() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
-
+/* Fonction d'initialisation */
 function init() {
     try {
         /* Je récupère l'ID du photographe depuis l'URL */
@@ -172,10 +186,13 @@ function init() {
         fetch('data/photographers.json')
             .then((response) => response.json())
             .then((data) => {
+                /* Je recherche le photographe avec l'ID." et je reconverti l'ID en un nombre */
+
                 const selectedPhotographer = data.photographers.find(photographer =>
+
                     photographer.id === parseInt(photographerId)
                 );
-
+                /* Si aucun photographe n'est trouvé avec l'ID spécifié, je génère une erreur */
                 if (!selectedPhotographer) {
                     throw new Error("Le photographe avec l'ID spécifié n'a pas été trouvé.");
                 }
@@ -207,17 +224,20 @@ function closeLightbox() {
 }
 
 function prevPhoto() {
-    currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+    /* je recupere l'index de l'image dans le tableau et j'enleve 1 pour avoir l'image precedente */
+    currentIndex = (currentIndex - 1) ;
     changeImage(imagesData[currentIndex]);
 }
 
 function nextPhoto() {
-    currentIndex = (currentIndex + 1) % imagesData.length;
+    currentIndex = (currentIndex + 1);
     changeImage(imagesData[currentIndex]);
 }
 
 function changeImage(imageData) {
+    /* containerImage.replaceChildren pour vider le containerImage */
     containerImage.replaceChildren([])
+    /* si image est une image je creer une image sinon une video */
     if ("image" in imageData) {
         const image = document.createElement('img');
         image.id = "lightbox-image";
@@ -270,55 +290,75 @@ window.addEventListener('keydown', function (e) {
     }
 })
 
-
-const btnDropdown = document.querySelector('.btn-dropdown');
-function showHideMenu() {
-    const dropdownContent = document.querySelector('.dropdown-content');    
+/* Fonction pour afficher ou masquer le menu déroulant*/
+function toggleMenu() {
+    const dropdownContent = document.querySelector('.dropdown-content');
     dropdownContent.classList.toggle('active');
     document.querySelector('.chevron').classList.toggle('rotate');
 }
 
+/* Fonction pour mettre à jour le texte du bouton de tri*/
+function updateSortButtonText(button, newText) {
+    button.textContent = newText;
+}
 
-btnDropdown.addEventListener('click', showHideMenu);
+/* Fonction pour masquer un bouton et afficher l'option sélectionnée*/
+function hideButtonAndShowSelectedOption(button, selectedOption) {
+    if (selectedOption) {
+        selectedOption.style.display = 'block';
+    }
+    button.style.display = 'none';
+}
+
+/*Fonction pour trier les données en fonction du type de tri*/
+function sortImages(sortType) {
+    switch (sortType) {
+        case 'Popularité':
+            return imagesData.slice().sort((a, b) => b.likes - a.likes);
+        case 'Date':
+            return imagesData.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+        case 'Titre':
+            return imagesData.slice().sort((a, b) => a.title.localeCompare(b.title));
+        default:
+            return imagesData;
+    }
+}
+
+/* Fonction pour mettre à jour l'affichage après le tri*/
+function updateDisplay() {
+    genererCarte();
+    toggleMenu();
+}
+
+/*Écouteur d'événement pour le clic sur le bouton de tri*/
+function handleFilterClick(filter) {
+    return () => {
+        const filterValue = filter.textContent;
+        updateSortButtonText(currentSort, filterValue);
+        hideButtonAndShowSelectedOption(filter, optionFilters);
+        optionFilters = filter;
+        const sortedData = sortImages(filterValue);
+        imagesData = sortedData;
+        updateDisplay();
+    };
+}
+
+/* Sélection des éléments du DOM*/
+const btnDropdown = document.querySelector('.btn-dropdown');
+btnDropdown.addEventListener('click', toggleMenu);
 const allFilters = Array.from(document.querySelectorAll('.dropdown-content li button'));
 const currentSort = document.getElementById('sort');
-allFilters.tabIndex = 0;
+let optionFilters = allFilters.find((filter) => filter.textContent === currentSort.textContent);
 
-let optionFilters = allFilters.find((filter) => filter.textContent === 
-currentSort.textContent);
-optionFilters.style.display = 'none';
+/* Ajout d'écouteurs d'événements aux boutons de tri*/
+allFilters.forEach((filter) => {
+    filter.addEventListener('click', handleFilterClick(filter));
+});
 
-allFilters.forEach(filter => {
-    filter.addEventListener('click', () => {
-      const filterValue = filter.textContent;
-      currentSort.textContent = filterValue;
-      if (optionFilters) optionFilters.style.display = 'block';
-      filter.style.display = 'none';
-      optionFilters = filter;
-      const sortedData = sortData(filterValue);
-      imagesData = sortedData;
-      genererCarte();
-      showHideMenu();
-    });
-  });
-
-
-const sortData = (sortType) => {
-    switch (sortType) {
-      case 'Popularité':
-        return imagesData.slice().sort((a, b) => b.likes - a.likes);
-      case 'Date':
-        return imagesData.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-      case 'Titre':
-        return imagesData.slice().sort((a, b) => a.title.localeCompare(b.title));
-      default:
-        return imagesData;
-    }
-  };
-
+/*Fonction pour générer les cartes d'affichage des médias*/
 function genererCarte() {
     const mediaContener = document.getElementById('mediaContener');
-    mediaContener.innerHTML = ''; 
+    mediaContener.innerHTML = '';
 
     for (let i = 0; i < imagesData.length; i++) {
         const mediaInstance = new MediaPhotoVideo(imagesData[i]);

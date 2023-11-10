@@ -95,7 +95,7 @@ async function init() {
 
         /* j'appel la fonction displayPhotographerInfo en parametre l'ID du photographe */
         displayPhotographerInfo(selectedPhotographer);
-        totalLikesDesPhotos(media);
+        totalLikesMedia(media);
         priceMedia(photographerId, photographerData);
 
 
@@ -124,9 +124,9 @@ function displayPhotographerInfo(selectedPhotographer) {
 /* J'appelle la fonction init pour afficher les informations du photographe */
 init();
  
-function totalLikesDesPhotos(media) {
+function totalLikesMedia(media) {
     const totalLikes = media.reduce((total, media) => total + media.likes,0);
-    const totalLikesContainer = document.getElementById("total-likes");
+    const totalLikesContainer = document.getElementById("total-likesDesMedia");
     const likesText = `<span id="totalLikes">${totalLikes}</span> <i class="fa-solid fa-heart"></i>`;
     totalLikesContainer.innerHTML = likesText;
 }
