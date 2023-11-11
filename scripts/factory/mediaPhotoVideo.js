@@ -241,6 +241,7 @@ function changeImage(imageData) {
     if ("image" in imageData) {
         const image = document.createElement('img');
         image.id = "lightbox-image";
+        /* ajouter l'image au containerImage */
         containerImage.appendChild(image)
         modalImage = document.getElementById('lightbox-image');
         modalImage.src = `assets/images/${imageData.photographerId}/${imageData.image}`;
@@ -297,7 +298,7 @@ function toggleMenu() {
     document.querySelector('.chevron').classList.toggle('rotate');
 }
 
-/* Fonction pour mettre à jour le texte du bouton de tri*/
+/* Fonction pour mettre à jour le texte du bouton de tri lors du click*/
 function updateSortButtonText(button, newText) {
     button.textContent = newText;
 }
@@ -333,11 +334,17 @@ function updateDisplay() {
 /*Écouteur d'événement pour le clic sur le bouton de tri*/
 function handleFilterClick(filter) {
     return () => {
+        /* recuperer le texte du bouton de tri */
         const filterValue = filter.textContent;
+        /* mettre le texte du bouton de tri dans le bouton de tri */
         updateSortButtonText(currentSort, filterValue);
+        /* masquer le bouton et afficher l'option choisie */
         hideButtonAndShowSelectedOption(filter, optionFilters);
+        /* changer l'option de tri */
         optionFilters = filter;
+        /* trier les données en fonction du type de tri */
         const sortedData = sortImages(filterValue);
+        /* mettre a jour la variable globale qui contient les données trieées*/
         imagesData = sortedData;
         updateDisplay();
     };
@@ -345,23 +352,30 @@ function handleFilterClick(filter) {
 
 /* Sélection des éléments du DOM*/
 const btnDropdown = document.querySelector('.btn-dropdown');
+/* Ajout d'écouteur d'événements au bouton de tri pour afficher ou masquer le menu déroulant*/
 btnDropdown.addEventListener('click', toggleMenu);
+/*selectionner tous les boutons de tri  */
 const allFilters = Array.from(document.querySelectorAll('.dropdown-content li button'));
+allFilters.tabIndex = 0;
 const currentSort = document.getElementById('sort');
+/*masquer le bouton currenSort*/
 let optionFilters = allFilters.find((filter) => filter.textContent === currentSort.textContent);
-
-/* Ajout d'écouteurs d'événements aux boutons de tri*/
+optionFilters.style.display = 'none';
+/*pour chaque bouton de tri on ajoute un écouteur d'événements avec la fonction handleFilterClick */
 allFilters.forEach((filter) => {
     filter.addEventListener('click', handleFilterClick(filter));
 });
 
 /*Fonction pour générer les cartes d'affichage des médias*/
 function genererCarte() {
+    /* Je vide le conteneur des cartes */
     const mediaContener = document.getElementById('mediaContener');
     mediaContener.innerHTML = '';
-
+/* Pour chaque image je crée une carte */
     for (let i = 0; i < imagesData.length; i++) {
+        /* Je crée une nouvelle instance de la classe MediaPhotoVideo */
         const mediaInstance = new MediaPhotoVideo(imagesData[i]);
+        /* Je l'ajoute au conteneur */
         const mediaCard = mediaInstance.genererCarte(i, imagesData);
         mediaContener.appendChild(mediaCard);
     }

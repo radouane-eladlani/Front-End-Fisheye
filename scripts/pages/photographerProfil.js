@@ -73,17 +73,21 @@ async function init() {
             throw new Error("Aucun ID de photographe spécifié dans l'URL.");
         }
 
-        /* J'obtiens les données du photographe depuis une source externe (peut-être un fichier JSON) */
+        /* J'obtiens les données du photographe depuis une source externe*/
         const photographerData = await getPhotographerData();
         /* Je cherche le photographe correspondant à l'ID spécifié ensuite 
         je reconverti l'ID en un nombre */
-
         const selectedPhotographer = photographerData.photographers.find(photographer =>
             photographer.id === parseInt(photographerId));
+            /* je creer une constante media et je lui passe les données du json et ensuite 
+            je filtre les media.photographerId */
         const media = photographerData.media.filter(media =>
                 media.photographerId === parseInt(photographerId));
+                /* je parcours la liste des medias */  
         media.forEach((element, index) => {
+            /* je creer une constante mediaclass et je lui passe la new class MediaPhotoVideo */
             const mediaclass = new MediaPhotoVideo(element);
+            /*j'append le mediaclass a l'id mediaContener */
             document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index,media));
 
         });
@@ -95,7 +99,9 @@ async function init() {
 
         /* j'appel la fonction displayPhotographerInfo en parametre l'ID du photographe */
         displayPhotographerInfo(selectedPhotographer);
+        /* j'appel la fonction totalLikesMedia en parametre media */
         totalLikesMedia(media);
+        /* j'appel la fonction priceMedia en parametre l'ID du photographe et le fichier JSON */
         priceMedia(photographerId, photographerData);
 
 
