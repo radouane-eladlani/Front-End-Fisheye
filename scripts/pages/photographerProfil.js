@@ -73,25 +73,25 @@ async function init() {
             throw new Error("Aucun ID de photographe spécifié dans l'URL.");
         }
 
-        /* J'obtiens les données du photographe depuis une source externe*/
+        /* J'obtiens les données du photographe depuis le fichier JSON*/
         const photographerData = await getPhotographerData();
         /* Je cherche le photographe correspondant à l'ID spécifié ensuite 
         je reconverti l'ID en un nombre */
         const selectedPhotographer = photographerData.photographers.find(photographer =>
             photographer.id === parseInt(photographerId));
-            /* je creer une constante media et je lui passe les données du json et ensuite 
-            je filtre les media.photographerId */
+        /* je creer une constante media et je lui passe les données du json et ensuite 
+        je filtre les media.photographerId */
         const media = photographerData.media.filter(media =>
-                media.photographerId === parseInt(photographerId));
-                /* je parcours la liste des medias */  
+            media.photographerId === parseInt(photographerId));
+        /* je parcours la liste des medias */
         media.forEach((element, index) => {
             /* je creer une constante mediaclass et je lui passe la new class MediaPhotoVideo */
             const mediaclass = new MediaPhotoVideo(element);
             /*j'append le mediaclass a l'id mediaContener */
-            document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index,media));
+            document.getElementById('mediaContener').appendChild(mediaclass.genererCarte(index, media));
 
         });
-    
+
         /* Si aucun photographe n'est trouvé avec l'ID spécifié, je génère une erreur */
         if (!selectedPhotographer) {
             throw new Error("Le photographe avec l'ID spécifié n'a pas été trouvé.");
@@ -124,27 +124,32 @@ function displayPhotographerInfo(selectedPhotographer) {
     photographerLocation.textContent = `${selectedPhotographer.city}, ${selectedPhotographer.country}`;
     photographerTagline.textContent = selectedPhotographer.tagline;
     photographerImage.src = `assets/photographers/${selectedPhotographer.portrait}`;
-    
+
 }
 
 /* J'appelle la fonction init pour afficher les informations du photographe */
 init();
- 
+
+/*fonction qui permet de mettre a jour le total des likes des medias */
 function totalLikesMedia(media) {
-    const totalLikes = media.reduce((total, media) => total + media.likes,0);
+    /*Utilisation de reduce pour sommer les likes de tous les médias*/
+    const totalLikes = media.reduce((total, media) => total + media.likes, 0);
+    /*Sélection de l'élément DOM pour afficher le new total des likes*/
     const totalLikesContainer = document.getElementById("total-likesDesMedia");
+    /* Création du texte HTML avec le total des likes et l'icône de cœur*/
     const likesText = `<span id="totalLikes">${totalLikes}</span> <i class="fa-solid fa-heart"></i>`;
+    /*Mise à jour du contenu de l'élément DOM avec le texte généré*/
     totalLikesContainer.innerHTML = likesText;
 }
-    
-    function priceMedia(photographerId, photographerData) {
-        const photographer = photographerData.photographers.find(photographer =>
-            photographer.id === parseInt(photographerId));
-        
-        if (photographer) {
-            const priceContainer = document.getElementById("price-jour");
-            priceContainer.textContent = `${photographer.price}€ / jour`;
-        }
+/*fonction qui permet d'avoir le prix de chaque photographe et de le mettre dans le DOM */
+function priceMedia(photographerId, photographerData) {
+    /*Recherche du photographe correspondant à l'ID*/
+    const photographer = photographerData.photographers.find(photographer =>
+        photographer.id === parseInt(photographerId));
+/* si photographer alors je creer une constante pour le prix du photographe*/
+    if (photographer) {
+        const priceContainer = document.getElementById("price-jour");
+        priceContainer.textContent = `${photographer.price}€ / jour`;
     }
+}
 
-    

@@ -21,22 +21,22 @@
       <div class="modal">
         <header>
           <div id="contact_modal_title"></div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" role="button" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Fermer" alt="fermer" role="button" />
         </header>
 
-        <form role="form" aria-label="Formulaire de contact">
+        <form aria-label="Formulaire de contact">
           <div>
             <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" aria-label="Prénom" role="textbox" tabindex="0" />
+            <input type="text" id="prenom" aria-label="Prénom" name="prenom" role="textbox" tabindex="0" />
 
             <label for="nom">Nom</label>
-            <input type="text" id="nom"  aria-label="Nom" role="textbox" tabindex="0" />
+            <input type="text" id="nom"  aria-label="Nom"  name="nom" role="textbox" tabindex="0" />
 
             <label for="email">Email</label>
-            <input type="email" id="email"  aria-label="Adresse email" role="textbox" tabindex="0"  />
+            <input type="email" id="email"  aria-label="Adresse email" name="email" role="textbox" tabindex="0"  />
 
             <label for="message">Votre message</label>
-            <textarea class="form_input_message" id="message" aria-label="Message" role="textbox" 
+            <textarea class="form_input_message" id="message" aria-label="Message" name="message" role="textbox" 
               tabindex="0"></textarea>
           </div>
           <button class="contact_button" type="submit" id="submit" aria-label="envoyer" role="button" 
@@ -69,12 +69,12 @@
       <div class="filter">
         <h4>Trier par </h4>
         <div class="filter-container">
-          <div class="dropdown">
+          <div class="dropdown" aria label="Trier par">
             <button class="btn-dropdown">
               <span id="sort" tabindex="0">Popularité</span>
-              <span class="chevron"> <i class="fas fa-chevron-up"> </i></span>
+              <span class="chevron"> <strong class="fas fa-chevron-up"> </strong></span>
             </button>
-            <ul class="dropdown-content" >
+            <ul class="dropdown-content">
               <li>
                 <button tabindex="0">Popularité</button>
               </li>

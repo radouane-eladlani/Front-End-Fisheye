@@ -153,14 +153,14 @@ class MediaPhotoVideo {
 }
 
 
-
 const modal = document.querySelector('.lightbox');
 const containerImage = document.getElementById('image-carousel');
 let modalImage = document.getElementById('lightbox-image');
 let modalVideo = document.getElementById('lightbox-video');
 const modalTitle = document.getElementById('lightbox-title');
+/* je creer un tableau vide qui contiendra les images et videos */
 let imagesData = [];
-
+/* j'initialise l'index de l'image */
 let currentIndex = 0;
 
 const prevButton = document.getElementById('prev-button');
@@ -225,13 +225,19 @@ function closeLightbox() {
 
 function prevPhoto() {
     /* je recupere l'index de l'image dans le tableau et j'enleve 1 pour avoir l'image precedente */
-    currentIndex = (currentIndex - 1) ;
-    changeImage(imagesData[currentIndex]);
+    currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+    const imageData = imagesData[currentIndex]
+    if (imageData){
+        changeImage(imageData);
+    }
 }
 
 function nextPhoto() {
-    currentIndex = (currentIndex + 1);
-    changeImage(imagesData[currentIndex]);
+    currentIndex = (currentIndex + 1 + imagesData.length) % imagesData.length;
+    const imageData = imagesData[currentIndex]
+    if (imageData){
+        changeImage(imageData);
+    }
 }
 
 function changeImage(imageData) {
@@ -272,7 +278,7 @@ closeButton.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', function (e) {
-    if (e.key == 'Escape') {
+    if (e.key === 'Escape') {
         e.preventDefault();
         closeLightbox();
     }

@@ -1,4 +1,3 @@
-
 /* Récupérer les données des photographes */
 async function getPhotographers() {
     try {
@@ -22,7 +21,7 @@ async function getPhotographers() {
     async function displayData(photographers) {
         /* je recupere la class photographer_section */
         const photographersSection = document.querySelector(".photographer_section");
-        /* je parcours la liste des photographes */
+        /* je parcours la liste des donnees des photographes */
         photographers.forEach((photographer) => {
             /* je creer une constante photographerModel avec la fonction photographerTemplate
             et je lui passe les données de l'objet photographer pour les affichers */
@@ -30,7 +29,7 @@ async function getPhotographers() {
             /* je creer une constante userCardDOM et je lui passe
             la constante photographerModel avec la fonction getUserCardDOM pour les affichers*/
             const userCardDOM = photographerModel.getUserCardDOM();
-            /* ensuite je ratache la constante userCardDOM a la div photographer_section */
+            /* ensuite je ratache la constante userCardDOM a la class photographer_section */
             photographersSection.appendChild(userCardDOM);
         });
     }
@@ -44,5 +43,6 @@ async function getPhotographers() {
 
     /* je lance la fonction init */
     init();
+
     
     

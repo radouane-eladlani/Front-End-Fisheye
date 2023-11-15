@@ -1,3 +1,4 @@
+/* Récupérer les données des photographes */
 async function getPhotographerData() {
     try {
         const response = await fetch('data/photographers.json');
@@ -12,23 +13,30 @@ async function getPhotographerData() {
     }
 }
 
+/* Fonction pour avoir le focus à l'intérieur d'un élément comme le formulaire*/
 const trapFocus = (element, prevFocusableElement = document.activeElement) => {
+    /* Sélection de tous les éléments focusables à l'intérieur de l'élément donné*/
     const focusableEls = Array.from(
-        element.querySelectorAll(
-            '[tabindex]:not([tabindex="-1"])'
-        )
-    );
+        element.querySelectorAll('[tabindex]:not([tabindex="-1"])')
+    );    
+    /* Premier élément focusable dans la liste*/
     const firstFocusableEl = focusableEls[0];
+    /* dernier élément focusable dans la liste*/
     const lastFocusableEl = focusableEls[focusableEls.length - 1];
+    /* Variable pour suivre l'élément actuellement focusé*/
     let currentFocus = null;
 
+    /* focus sur le premier element*/
     firstFocusableEl.focus();
     currentFocus = firstFocusableEl;
+    /* gérer le focus lors de l'utilisation des touches de direction*/
+
     const handleFocus = e => {
         e.preventDefault();
         if (focusableEls.includes(e.target)) {
             currentFocus = e.target;
         } else {
+            /* si l'utilisateur essaie de sortir de l'élément, rediriger le focus vers le début ou la fin*/
             if (currentFocus === firstFocusableEl) {
                 lastFocusableEl.focus();
             } else {
@@ -37,8 +45,10 @@ const trapFocus = (element, prevFocusableElement = document.activeElement) => {
             currentFocus = document.activeElement;
         }
     };
+/* parcourir tous les éléments pour les définir comme focusables*/
     focusableEls.forEach((el, index) => {
-        el.addEventListener("keydown", function(event) {
+            /*Ajout d'événements de gestion du focus pour les touches de direction (haut et bas) */
+        el.addEventListener("keydown", function (event) {
             if (event.key === "ArrowDown") {
                 event.preventDefault();
                 const nextIndex = (index + 1) % focusableEls.length;
@@ -51,44 +61,50 @@ const trapFocus = (element, prevFocusableElement = document.activeElement) => {
         });
     });
 
-
+    /* Ajout d'un événement global pour suivre le focus à l'intérieur de l'élément*/
     document.addEventListener("focus", handleFocus, true);
 
+/* Retourne un objet avec une méthode onClose pour remover le gestionnaire de focus */
     return {
         onClose: () => {
             document.removeEventListener("focus", handleFocus, true);
+            /* si le focus est sur le dernier élément, rediriger le focus vers le premier*/
             prevFocusableElement.focus();
         }
     };
 };
 
+/* Fonction pour afficher le modal de contact */
 async function displayModal() {
-
     let trapped;
+    /*afficher ou masquer le modal de contact */
     const modal = document.getElementById("contact_modal");
     if (modal.getAttribute('aria-hidden') === "true") {
         modal.style.display = "flex";
         modal.setAttribute('aria-hidden', false)
+        /* appel de la fonction trapFocus pour avoir le focus sur le formulaire */
         trapped = trapFocus(modal);
     } else {
+        /* sinon on masque le modal de contact */
         modal.style.display = "none";
-        if (trapped && trapped.onClose){
-                    trapped.onClose();
-
+        /* onclose pour retirer le focus quand le modal est masqué */
+        if (trapped && trapped.onClose) {
+            trapped.onClose();
         }
     }
-
+/* récupérer l'id du photographe depuis l'URL */
     const photographerId = urlParams();
     if (!photographerId) {
         console.error("Aucun ID de photographe spécifié dans l'URL");
         return;
     }
-
+/* attendre que les données soient récupérées */
     const data = await getPhotographerData();
-
+/* si les données sont récupérées*/
     if (data.photographers) {
+        /* Recherche du photographe par son ID dans la liste des photographes */
         const photographer = data.photographers.find(photographe => photographe.id === parseInt(photographerId));
-
+/* si le photographe est trouvé */
         if (photographer) {
             modal.style.display = "flex";
             const modal_title = document.getElementById("contact_modal_title");
@@ -100,47 +116,47 @@ async function displayModal() {
 }
 
 
+/* Fonction pour fermer le modal de contact */
+function closeModal() {
+    const modal = document.getElementById("contact_modal");
+    modal.style.display = "none";
+}
+/* Gestionnaire de touche pour fermer le modal de contact */
+window.addEventListener('keydown', function (e) {
+    if (e.key == 'Escape') {
+        e.preventDefault();
+        closeModal();
+    }
+});
+/* Fonction pour récupérer l'id du photographe depuis l'URL */
+function urlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+}
 
-            function closeModal() {
-                const modal = document.getElementById("contact_modal");
-                modal.style.display = "none";
-            }
-            window.addEventListener('keydown', function (e) {
-                if (e.key == 'Escape') {
-                    e.preventDefault();
-                    closeModal();
-                    this.location.reload();
-                }
-            });
-            function urlParams() {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('id');
-            }
+/* Fonction pour soumettre le formulaire de contact du photographe */
+function submitForm(e) {
+    e.preventDefault();
 
-            function submitForm(e) {
-                e.preventDefault();
+    const form = document.querySelector("form");
 
-                const form = document.querySelector("form");
+    const photographerId = urlParams();
 
-                const photographerId = urlParams();
-
-                if (photographerId) {
-                    const formData = new FormData(form);
-
-                    formData.forEach((value, key) => {
-                        console.log(`${key}: ${value}`);
-                    });
-
-                } else {
-                    console.error("Aucun ID de photographe spécifié dans l'URL.");
-                }
-
-            }
-            const form = document.querySelector("form");
-            form.addEventListener("submit", submitForm);
-
-            form.addEventListener("keydown", (event) => {
-                if (event.key === "Enter") {
-                    submitForm(event);
-                }
-            })
+    if (photographerId) {
+        const formData = new FormData(form);
+        formData.forEach((value, key) => {
+            console.log(key + ": " + value);
+        })
+    } else {
+        console.error("Aucun ID de photographe spécifié dans l'URL.");
+    }
+}
+/* au subtmit du form, on appelle la fonction submitForm */
+const form = document.querySelector("form");
+form.addEventListener("submit", submitForm);
+/* gestionnaire de touche pour soumettre le formulaire de contact */
+form.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        submitForm(event);
+    }
+})
