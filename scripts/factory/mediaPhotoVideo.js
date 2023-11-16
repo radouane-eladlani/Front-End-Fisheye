@@ -303,7 +303,6 @@ function toggleMenu() {
     dropdownContent.classList.toggle('active');
     document.querySelector('.chevron').classList.toggle('rotate');
 }
-
 /* Fonction pour mettre à jour le texte du bouton de tri lors du click*/
 function updateSortButtonText(button, newText) {
     button.textContent = newText;
@@ -364,12 +363,29 @@ btnDropdown.addEventListener('click', toggleMenu);
 const allFilters = Array.from(document.querySelectorAll('.dropdown-content li button'));
 allFilters.tabIndex = 0;
 const currentSort = document.getElementById('sort');
+currentSort.addEventListener('keydown', function (e) {
+    if (e.key == "ArrowDown" || e.key == "ArrowUp") {
+        // Calcul de l'index du filtre suivant en fonction de la direction
+        currentIndex = (e.key == "ArrowDown") ? (currentIndex + 1) % allFilters.length : (currentIndex - 1 + allFilters.length) % allFilters.length;
+        // Appel de la fonction handleFilterClick pour mettre à jour le tri
+        handleFilterClick();
+    }
+});
+
 /*masquer le bouton currenSort*/
 let optionFilters = allFilters.find((filter) => filter.textContent === currentSort.textContent);
 optionFilters.style.display = 'none';
 /*pour chaque bouton de tri on ajoute un écouteur d'événements avec la fonction handleFilterClick */
 allFilters.forEach((filter) => {
+    filter.tabIndex = 0; // Ajouter l'attribut tabindex
     filter.addEventListener('click', handleFilterClick(filter));
+    // Ajouter un écouteur d'événements pour la touche "Enter"
+    filter.addEventListener('keydown', function (e) {
+        if (e.key === "Enter") {
+            filter.click();
+            toggleMenu(); // Fermer le menu déroulant après avoir cliqué sur une option
+        }
+    });
 });
 
 /*Fonction pour générer les cartes d'affichage des médias*/

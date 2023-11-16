@@ -92,6 +92,18 @@
     text-align: left;
     background-color: transparent;
     border-top : white solid 1px;
+    outline: none;
+}
+.dropdown-content li button:focus,
+.dropdown-content li button:active {
+    outline: 0;
+    border: 1px solid white;
+    box-shadow: 0 0 0 2px blue inset;
+    border-radius: 3px;
+}
+.dropdown-content li button:active {
+    border-top: white solid 1px;
+    box-shadow: none;
 }
 
 .dropdown-content{ 
