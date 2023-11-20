@@ -246,7 +246,8 @@ cursor: pointer;
 #close-button {
     cursor: pointer;
     color: #000000;
-    flex-grow: 0.89;
+    flex-grow: 0.88;
+    height: 6%;
 }
 
 #next-button {
@@ -290,7 +291,7 @@ cursor: pointer;
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -310,9 +311,9 @@ cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 55px;
+    font-size: 50px;
     font-weight: normal;
-    margin-top: 85px;
+    margin-top: 88px;
 }
 
 form {
@@ -333,7 +334,8 @@ form div {
     width: 100%;
     align-items: self-start;
     margin-bottom: 26px;
-    margin-top: 100px;
+    margin-top: 70px;
+    height: 410px;
 }
 
 form input {
@@ -350,7 +352,7 @@ form input {
 }
 
 #container-carousel {
-    height: 90%;
+    height: 65%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -363,6 +365,7 @@ form input {
 
 #image-carousel {
     height: 90%;
+    width: 100%;
     display: flex;
     overflow: hidden;
 }
@@ -379,9 +382,11 @@ form input {
 #suivant-carousel i{
     padding: 0 10px 0;
     font-size: 3em;
+    cursor: pointer;
 }
 
 #precedent-carousel i{
     padding: 0 10px 0;
     font-size: 3em;
+    cursor: pointer;
 }

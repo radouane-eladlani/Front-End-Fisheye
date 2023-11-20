@@ -147,6 +147,8 @@ function submitForm(e) {
         formData.forEach((value, key) => {
             console.log(key + ": " + value);
         })
+        closeModal();
+        form.reset();
     } else {
         console.error("Aucun ID de photographe spécifié dans l'URL.");
     }
@@ -154,6 +156,7 @@ function submitForm(e) {
 /* au subtmit du form, on appelle la fonction submitForm */
 const form = document.querySelector("form");
 form.addEventListener("submit", submitForm);
+
 /* gestionnaire de touche pour soumettre le formulaire de contact */
 form.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {

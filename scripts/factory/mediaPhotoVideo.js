@@ -1,4 +1,4 @@
-/* classe MediaPhotoVideo sert a la construction des cartes */
+/* class MediaPhotoVideo sert a la construction des cartes */
 class MediaPhotoVideo {
     constructor(data) {
         this.id = data.id;
@@ -107,7 +107,7 @@ class MediaPhotoVideo {
 
         return article;
     }
-/* je creer une fonction openLightbox */
+    /* je creer une fonction openLightbox */
     openLightbox(indexImg, elementSrc) {
         const modal = document.querySelector('.lightbox');
         const containerImage = document.getElementById('image-carousel');
@@ -133,6 +133,7 @@ class MediaPhotoVideo {
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
     }
+    
     /* je creer un element image et video */
     createImage(elementSrc) {
         const image = document.createElement('img');
@@ -227,7 +228,7 @@ function prevPhoto() {
     /* je recupere l'index de l'image dans le tableau et j'enleve 1 pour avoir l'image precedente */
     currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
     const imageData = imagesData[currentIndex]
-    if (imageData){
+    if (imageData) {
         changeImage(imageData);
     }
 }
@@ -235,7 +236,7 @@ function prevPhoto() {
 function nextPhoto() {
     currentIndex = (currentIndex + 1 + imagesData.length) % imagesData.length;
     const imageData = imagesData[currentIndex]
-    if (imageData){
+    if (imageData) {
         changeImage(imageData);
     }
 }
@@ -393,7 +394,7 @@ function genererCarte() {
     /* Je vide le conteneur des cartes */
     const mediaContener = document.getElementById('mediaContener');
     mediaContener.innerHTML = '';
-/* Pour chaque image je crée une carte */
+    /* Pour chaque image je crée une carte */
     for (let i = 0; i < imagesData.length; i++) {
         /* Je crée une nouvelle instance de la classe MediaPhotoVideo */
         const mediaInstance = new MediaPhotoVideo(imagesData[i]);
