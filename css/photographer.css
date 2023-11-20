@@ -247,7 +247,7 @@ cursor: pointer;
     cursor: pointer;
     color: #000000;
     flex-grow: 0.88;
-    height: 6%;
+    height: 4%;
 }
 
 #next-button {
@@ -359,8 +359,8 @@ form input {
 } 
 
 #content-carousel {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
 }
 
 #image-carousel {
